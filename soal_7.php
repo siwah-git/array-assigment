@@ -1,64 +1,56 @@
 <?php
 
 /**
- * A class to solve a specific array problem.
- *
- * This class contains a method to filter numbers and
- * count the remaining elements in an array.
+ * A utility class to handle common array operations.
+ * This is the kind of stuff you do every day as a dev.
  */
 class ArrayProcessor {
 
     /**
-     * Filters out numbers that are multiples of a given value and counts the remaining elements.
+     * Filters a range of numbers, removing multiples of a specific divisor,
+     * and then reports the final count. It's a clean way to handle data
+     * that needs some basic sanitation.
      *
-     * @param array $array The input array of numbers.
-     * @param int $divisor The number used to find multiples (e.g., 3 for multiples of 3).
-     * @return array An associative array containing 'filtered_array' and 'count'.
+     * @param int $start The starting number of the range.
+     * @param int $end The ending number of the range.
+     * @param int $divisor The number used to filter out multiples.
+     * @return array An array containing the filtered numbers and their count.
      */
-    public function filterAndCount(array $array, int $divisor): array
+    public function processFilteredNumbers(int $start, int $end, int $divisor): array
     {
-        // Use array_filter to remove multiples of the specified divisor.
-        // The anonymous function returns true for numbers that are NOT multiples.
-        $filteredArray = array_filter($array, function($number) use ($divisor) {
+        // First, let's create our initial array from the range
+        $numbers = range($start, $end);
+        
+        // Use a simple `array_filter` with a closure. It's concise and readable.
+        $filteredNumbers = array_filter($numbers, function($number) use ($divisor) {
+            // This is the core logic: keep the number if it's NOT a multiple of the divisor
             return $number % $divisor !== 0;
         });
 
-        // Recount the elements after filtering.
-        $count = count($filteredArray);
+        // Get the final count, this is super easy
+        $finalCount = count($filteredNumbers);
 
+        // Returning an associative array is a good way to give back multiple pieces of data
         return [
-            'filtered_array' => $filteredArray,
-            'count' => $count
+            'filtered_array' => $filteredNumbers,
+            'count' => $finalCount
         ];
     }
 }
 
 // =====================================
-// Problem Statement
-// =====================================
-// - Create an array of numbers from 1 to 20.
-// - Remove all numbers that are multiples of 3.
-// - Count the number of elements after removal.
+// Main Execution
 // =====================================
 
-// Create an array with numbers from 1 to 20.
-$initialArray = range(1, 20);
-
-// Instantiate the ArrayProcessor class.
 $processor = new ArrayProcessor();
 
-// Call the filterAndCount method with the array and divisor.
-$result = $processor->filterAndCount($initialArray, 3);
+// Get the result from our method call
+$result = $processor->processFilteredNumbers(1, 20, 3);
 
-// Display the initial array for comparison.
-echo "Initial Array: " . PHP_EOL;
-print_r($initialArray);
-
-// Display the array after filtering.
-echo PHP_EOL . "Array after removing multiples of 3:" . PHP_EOL;
+echo "--- No. 7 ---" . PHP_EOL;
+echo "Filtered Array (no multiples of 3):" . PHP_EOL;
 print_r($result['filtered_array']);
 
-// Display the final count.
-echo PHP_EOL . "Number of elements after removal: " . $result['count'] . PHP_EOL;
+echo PHP_EOL . "Count of remaining elements: " . $result['count'] . PHP_EOL;
 
 ?>

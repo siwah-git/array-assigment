@@ -1,56 +1,45 @@
 <?php
 
 /**
- * Class to handle array processing tasks, as assigned by the senior developer.
- * This class contains methods to add, update, and remove elements from an associative array.
+ * A utility class for handling inventory management.
+ * This is the kind of class you'd use to manipulate product lists in an application.
  */
-class ArrayModifier {
+class InventoryManager {
 
     /**
-     * Modifies the given associative array by performing a series of operations.
-     * This method handles adding new elements, updating existing ones, and removing specific elements.
+     * Updates an inventory list by performing several operations: adding new items,
+     * modifying existing item counts, and removing items.
      *
-     * @param array $fruitArray The initial associative array of fruits and their counts.
-     * @return array The final modified array after all operations.
+     * @param array $inventory The initial associative array of items and their quantities.
+     * @return array The final, modified inventory array.
      */
-    public function modifyFruitInventory(array $fruitArray): array
+    public function updateInventory(array $inventory): array
     {
-        // Add a new fruit, 'pisang', with a count of 4.
-        $fruitArray['pisang'] = 4;
+        // First, let's add a new item to our inventory.
+        $inventory['pisang'] = 4;
 
-        // Update the count for 'jeruk' to 3.
-        $fruitArray['jeruk'] = 3;
+        // Next, we need to adjust the count of an existing item.
+        $inventory['jeruk'] = 3;
 
-        // Remove the 'mangga' element completely.
-        unset($fruitArray['mangga']);
+        // Finally, remove an item that is no longer needed or out of stock.
+        unset($inventory['mangga']);
 
-        return $fruitArray;
+        return $inventory;
     }
 }
 
 // =====================================
-// Problem Statement
-// =====================================
-// Given an associative array:
-// ["apel" => 3, "jeruk" => 5, "mangga" => 2]
-// - Add "pisang" with a count of 4.
-// - Decrease the count of "jeruk" to 3.
-// - Remove "mangga" from the array.
+// Main Execution
 // =====================================
 
-// Initial fruit inventory
 $initialInventory = ["apel" => 3, "jeruk" => 5, "mangga" => 2];
+$manager = new InventoryManager();
 
-// Create an instance of the ArrayModifier class.
-$modifier = new ArrayModifier();
+echo "--- No. 9 ---" . PHP_EOL;
 
-// Call the method to perform the modifications.
-$finalInventory = $modifier->modifyFruitInventory($initialInventory);
-
-echo "Initial Fruit Inventory:" . PHP_EOL;
-print_r($initialInventory);
-
-echo PHP_EOL . "Final Fruit Inventory after modifications:" . PHP_EOL;
+// Get the final inventory after the updates.
+$finalInventory = $manager->updateInventory($initialInventory);
+echo "Final Fruit Inventory:" . PHP_EOL;
 print_r($finalInventory);
 
 ?>
