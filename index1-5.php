@@ -1,9 +1,10 @@
 <?php
 
-require_once "Question1.php";
-require_once "Question2.php";
-require_once "Question3.php";
-require_once "Question4.php";
+require_once "Soal1.php";
+require_once "Soal2.php";
+require_once "Soal3.php";
+require_once "Soal4.php";
+require_once "Soal5.php";
 
 
 echo "=== Question 1 ===". PHP_EOL . "<br>";
@@ -11,7 +12,7 @@ $numbers = [2, 4, 6, 76, 45, 34, 23, 12, 17, 90, 46, 88, 76, 73, 27];
 $question1 = new Question1 ($numbers); 
 
 echo "A. Row of Number: "; 
-echo print_r($numbers, true);
+echo "<pre>" . print_r($numbers, true) . "</pre>";
 
 echo "<br>";
 echo "B. Sort Ascending of Number : ";
@@ -36,7 +37,7 @@ $fruit = ["banana", "orange", "apple", "apple","orange","guava", "banana","mango
 $question2 = new Question2 ($fruit);
 
 echo "A. Row of Fruit : "; "<br>";
-print_r($question2->sortAscending());
+echo "<pre>" . print_r($fruit, true) . "</pre>";
 
 echo "<br>";
 echo " B. How Many Times Each Fruit Appears : "; "<br>";
@@ -51,18 +52,22 @@ echo "<br>";
 
 echo "=== Question 3 ===" . PHP_EOL . "<br>";
 
-$stationary = [ ["name" => "Pensil", "price" => 2000, "stock" => 10],
-["name" => "Buku", "price" => 5000, "stock" => 0],
-["name" => "Penghapus", "price" => 1000, "stock" => 5] ];
+$stationary = [ ["name" => "Pencil", "price" => 2000, "stock" => 10],
+["name" => "Book", "price" => 5000, "stock" => 0],
+["name" => "Eraser", "price" => 1000, "stock" => 5] ];
 
 $question3 = New Question3 ($stationary);
 
 echo "<br>";
-echo " A. Displays all out of stock items : ";"<br>";
+
+echo "A. Row of Stationery : ";
+echo "<pre>" . print_r($stationary, true) . "</pre>";
+
+echo " B. Displays all out of stock items : ";"<br>";
 print_r($question3->emptyStock());
 
 echo "<br>";
-echo "B. Sort Items by Highest Price : ";"<br>";
+echo "C. Sort Items by Highest Price : ";"<br>";
 print_r($question3->sortbyHighestPrice());
 
 echo "<br>";
@@ -74,7 +79,7 @@ $numbers = [2, 3, 4, 5, 6, 11, 12, 13, 14, 23, 25, 27, 28, 34, 35, 23];
 $question4 = new Question4 ($numbers);
 
 echo " A. Row of Number : "; 
-echo print_r($numbers, true);
+echo "<pre>" . print_r($numbers, true) . "</pre>";
 
 echo "<br>";
 echo "B. Displays all even numbers : "; "<br>";
@@ -83,5 +88,24 @@ print_r($question4->filterEven());
 echo "<br>";
 echo "B. Displays Even Numbers Multiplied by 3 : "; "<br>";
 print_r ($question4->multipliedBy3());
+
+
+echo "<br>";
+echo "<br>";
+echo "=== Question 5 ===" . PHP_EOL . "<br>";
+
+$score = ["Siwah" => 99, "Sinta" => 67, "Resty"=> 77, "Ronaldo"=>69, "Messi"=>87, "Neymar"=>80];
+$question5 = new Question5 ($score);
+
+echo " A. Row of Student and Score : ";
+echo "<pre>" . print_r($score, true) . "</pre>";
+
+echo "<br>";
+echo "B. Students with the Highest Scores : ";
+print_r ($question5->HighestScore());
+
+echo "<br>";
+echo "C. Number of Students Whose Scores are Below 70 : ";
+print_r($question5->studentUnder70());
 
 ?>
