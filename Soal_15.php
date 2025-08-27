@@ -1,31 +1,53 @@
 <?php
-
-class PenjualanAnalyzer {
-
+/**
+ * Class used to calculate total sales and find the month with the highest sales.
+ */
+class SalesAnalyzer {
+    /**
+     * @var $data sales data array
+     */
     private array $data;
 
-    public function __construct(array $penjualanArray) {
-        $this->data = $penjualanArray;
+    /**
+     * @param array $salesArray Array of sales data to be analyzed
+     */
+    public function __construct(array $salesArray) {
+        $this->data = $salesArray;
     }
 
-    public function hitungTotalPenjualan(): int {
+    /**
+     * Method to calculate total sales from all data.
+     * @return int total sales
+     */
+    public function countTotalSales(): int {
         $total = 0;
         foreach ($this->data as $item) {
-            $total += $item['total'];
+            $total += $item['total'] ?? 0;
         }
         return $total;
     }
 
-    public function cariBulanPenjualanTertinggi(): string {
-        $maxTotal = 0;
-        $bulanTertinggi = "";
-
+    /**
+     * Method to Finds the month with the highest total sales.
+     * @return string The name of the month with the highest sales.
+     */
+    public function searchHighestSalesMonth(): string { 
+        if (empty($this->data)) {
+            return "";
+        }
+        
+        $firstItem = reset($this->data);
+        $maxTotal = $firstItem['total'] ?? 0;
+        $highestSalesMonth = $firstItem['Month'] ?? "";
+        
         foreach ($this->data as $item) {
-            if ($item['total'] > $maxTotal) {
-                $maxTotal = $item['total'];
-                $bulanTertinggi = $item['bulan'];
+            if (isset($item['total']) && $item['total'] > $maxTotal) {
+                $maxTotal = $item['total']; 
+                $highestSalesMonth = $item['Month'];
             }
         }
-        return $bulanTertinggi;
+        return $highestSalesMonth;
     }
 }
+
+?>
