@@ -1,100 +1,63 @@
 <?php
 
 /**
- * Represents a product with its name and available variants.
+ * Class ProductAnalyzer
+ * Used to solve No. 6 about product data.
+ * This class provides a method to display all product names
+ * and all unique variants from a product list.
  */
-class Product {
-    /** @var string The name of the product. */
-    public string $name;
-
-    /** @var string[] An array of available variants for the product. */
-    public array $variants;
+class ProductAnalyzer {
 
     /**
-     * Constructs a new Product instance.
+     * Display all product names and all unique variants
+     * from a given product list.
      *
-     * @param string $name The product's name.
-     * @param array $variants An array of product variants.
+     * @param array $products Multidimensional array containing product data.
+     * @return void
      */
-    public function __construct(string $name, array $variants) {
-        $this->name = $name;
-        $this->variants = $variants;
-    }
-}
+    public function analyze(array $products): void
+    {
+        echo "--- No. 6: Product Data --- <br>";
 
-/**
- * Manages operations on a collection of products.
- */
-class ProductManager {
-    /** @var Product[] An array to hold all Product objects. */
-    private array $products;
-
-    /**
-     * Constructs a new ProductManager instance with an initial set of products.
-     *
-     * @param array $productData The raw array of product data.
-     */
-    public function __construct(array $productData) {
-        $this->products = $this->createProductObjects($productData);
-    }
-
-    /**
-     * Converts a raw array of product data into an array of Product objects.
-     *
-     * @param array $productData The raw product data array.
-     * @return Product[] An array of Product objects.
-     */
-    private function createProductObjects(array $productData): array {
-        $productObjects = [];
-        foreach ($productData as $data) {
-            $productObjects[] = new Product($data['nama'], $data['varian']);
+        // Get all product names using array_column
+        $productNames = array_column($products, 'name');
+        echo "Product Names:<br>";
+        foreach ($productNames as $name) {
+            echo "- " . $name . "<br>";
         }
-        return $productObjects;
-    }
+        echo "<br>";
 
-    /**
-     * Retrieves all product names from the collection.
-     *
-     * @return string[] An array containing the names of all products.
-     */
-    public function getAllProductNames(): array {
-        $names = [];
-        foreach ($this->products as $product) {
-            $names[] = $product->name;
-        }
-        return $names;
-    }
-
-    /**
-     * Retrieves all unique variants from all products.
-     *
-     * @return string[] An array of unique variant names.
-     */
-    public function getUniqueVariants(): array {
+        // Merge all variants into one array
         $allVariants = [];
-        foreach ($this->products as $product) {
-            $allVariants = array_merge($allVariants, $product->variants);
+        foreach ($products as $item) {
+            $allVariants = array_merge($allVariants, $item['variants']);
         }
-        return array_unique($allVariants);
+
+        // Remove duplicates to get unique variants
+        $uniqueVariants = array_unique($allVariants);
+
+        // Display unique variants
+        echo "Unique Variants:<br>";
+        foreach ($uniqueVariants as $variant) {
+            echo "- " . $variant . "<br>";
+        }
+        echo "<br>";
     }
 }
 
-// Data as provided in the problem.
-$produk = [
-    ["nama" => "Kaos", "varian" => ["merah", "biru", "hitam"]],
-    ["nama" => "Sepatu", "varian" => ["putih", "coklat"]],
-    ["nama" => "Topi", "varian" => ["hitam"]]
+// =====================================
+// Main Execution
+// =====================================
+$products = [
+    ["name" => "T-Shirt", "variants" => ["red", "blue", "black"]],
+    ["name" => "Shoes", "variants" => ["white", "brown"]],
+    ["name" => "Cap", "variants" => ["black"]]
 ];
 
-// Instantiate the manager and process the data.
-$manager = new ProductManager($produk);
+// Create an instance of ProductAnalyzer
+$analyzer = new ProductAnalyzer();
 
-// Task 1: Display all product names.
-echo "All Product Names:\n";
-print_r($manager->getAllProductNames());
+// Run the analysis method
+$analyzer->analyze($products);
 
-echo "\n\n"; // Add a line break for better readability
-
-// Task 2: Display all unique variants.
-echo "All Unique Variants:\n";
-print_r($manager->getUniqueVariants());
+?>

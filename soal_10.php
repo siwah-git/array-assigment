@@ -1,73 +1,45 @@
 <?php
 
 /**
- * A class to process employee data.
- * This is for a quick challenge from our senior dev.
+ * A utility class for handling inventory management.
+ * This is the kind of class you'd use to manipulate product lists in an application.
  */
-class EmployeeProcessor {
+class InventoryManager {
 
     /**
-     * Finds and lists the names of employees in a specific department.
+     * Updates an inventory list by performing several operations: adding new items,
+     * modifying existing item counts, and removing items.
      *
-     * @param array $employees An array of employee records.
-     * @param string $department The department to filter by (e.g., 'IT', 'HRD').
-     * @return array An array containing the names of employees in the specified department.
+     * @param array $inventory The initial associative array of items and their quantities.
+     * @return array The final, modified inventory array.
      */
-    public function findEmployeesByDepartment(array $employees, string $department): array
+    public function updateInventory(array $inventory): array
     {
-        $itEmployees = [];
-        // Loop through each employee record
-        foreach ($employees as $employee) {
-            // Check if the employee's division matches the target department
-            if ($employee['divisi'] === $department) {
-                // If it matches, add their name to our new array
-                $itEmployees[] = $employee['nama'];
-            }
-        }
-        return $itEmployees;
-    }
+        // First, let's add a new item to our inventory.
+        $inventory['pisang'] = 4;
 
-    /**
-     * Calculates the total salary for all employees in the given array.
-     *
-     * @param array $employees An array of employee records.
-     * @return int The sum of all employee salaries.
-     */
-    public function calculateTotalSalary(array $employees): int
-    {
-        $totalSalary = 0;
-        // Loop through the employees and add up their salaries
-        foreach ($employees as $employee) {
-            $totalSalary += $employee['gaji'];
-        }
-        return $totalSalary;
+        // Next, we need to adjust the count of an existing item.
+        $inventory['jeruk'] = 3;
+
+        // Finally, remove an item that is no longer needed or out of stock.
+        unset($inventory['mangga']);
+
+        return $inventory;
     }
 }
 
 // =====================================
-// Problem Statement
-// =====================================
-// Given a multidimensional employee array:
-// - Display all employee names in the IT division.
-// - Calculate the total salary of all employees.
+// Main Execution
 // =====================================
 
-$karyawan = [
-    ["nama" => "Rudi", "gaji" => 5000000, "divisi" => "IT"],
-    ["nama" => "Ayu", "gaji" => 4500000, "divisi" => "HRD"],
-    ["nama" => "Doni", "gaji" => 5500000, "divisi" => "IT"]
-];
+$initialInventory = ["apel" => 3, "jeruk" => 5, "mangga" => 2];
+$manager = new InventoryManager();
 
-// Create an instance of the class
-$processor = new EmployeeProcessor();
+echo "--- No. 9 ---" . PHP_EOL;
 
-// Task 1: Find and display IT employees
-$itEmployees = $processor->findEmployeesByDepartment($karyawan, 'IT');
-echo "IT Division Employees:" . PHP_EOL;
-print_r($itEmployees);
-
-// Task 2: Calculate and display total salary
-$totalGaji = $processor->calculateTotalSalary($karyawan);
-echo PHP_EOL . "Total Salary of all employees: Rp " . number_format($totalGaji, 0, ',', '.') . PHP_EOL;
+// Get the final inventory after the updates.
+$finalInventory = $manager->updateInventory($initialInventory);
+echo "Final Fruit Inventory:" . PHP_EOL;
+print_r($finalInventory);
 
 ?>

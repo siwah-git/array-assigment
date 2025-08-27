@@ -1,158 +1,159 @@
 <?php
 
 /**
- * A class containing solutions for multiple PHP array problems.
- * This class encapsulates the logic for problems 6 through 10.
+ * A handy utility class for common array manipulation tasks.
+ * This class encapsulates solutions for a few programming challenges.
  */
-class ArrayProblemSolver {
+class ArrayUtilities {
 
     /**
-     * Solves No. 6: Displays all product names and all unique variants.
+     * Extracts all product names and finds all unique variants from a list of products.
      *
-     * @param array $products The multidimensional array of product data.
+     * @param array $products The multidimensional array containing product data.
      * @return void
      */
-    public function solveNo6(array $products): void
+    public function processProductData(array $products): void
     {
-        echo "--- No. 6 ---" . PHP_EOL;
-        echo "<br>";
-
-        // Display all product names
+        echo "--- No. 6 ---" . "<br>" . PHP_EOL;
+        echo "All Product Names: ";
         $productNames = array_column($products, 'nama');
-        echo "All Product Names:" . PHP_EOL;
         print_r($productNames);
         echo "<br>";
 
-        // Display all unique variants
+        // Building a flat list of all variants, then using array_unique to get the distinct ones.
         $allVariants = [];
         foreach ($products as $item) {
             $allVariants = array_merge($allVariants, $item['varian']);
         }
         $uniqueVariants = array_unique($allVariants);
-        echo PHP_EOL . "All Unique Variants:" . PHP_EOL;
+        echo "All Unique Variants: ";
         print_r($uniqueVariants);
         echo "<br>";
         echo "<br>";
     }
 
     /**
-     * Solves No. 7: Filters out multiples of 3 from an array and counts the remaining elements.
+     * Filters a range of numbers to remove multiples of 3, then counts the remaining elements.
+     * A good demonstration of using closures with array functions.
      *
-     * @param array $numbers The initial array of numbers from 1 to 20.
+     * @param array $numbers The initial array of numbers.
      * @return void
      */
-    public function solveNo7(array $numbers): void
+    public function filterAndCountNumbers(array $numbers): void
     {
-        echo PHP_EOL . "--- No. 7 ---" . PHP_EOL;
-        echo "<br>";
+        echo PHP_EOL . "--- No. 7 ---" . "<br>" . PHP_EOL;
+        echo "Filtered Array: ";
 
-        // Filter out multiples of 3
-        $filteredNumbers = array_filter($numbers, function($number) {
-            return $number % 3 !== 0;
+        // Using array_filter with a closure is the standard, clean way to filter data.
+        $filteredNumbers = array_filter($numbers, function ($number) {
+            return $number % 3 !== 0; // Check if the number is not a multiple of 3.
         });
 
-        // Count the number of elements after filtering
         $elementCount = count($filteredNumbers);
-
-        echo "Filtered Array:" . PHP_EOL;
         print_r($filteredNumbers);
         echo "<br>";
-        echo PHP_EOL . "Count of elements after filtering: " . $elementCount . PHP_EOL;
+        echo "Count of elements after filtering: " . $elementCount . PHP_EOL;
         echo "<br>";
         echo "<br>";
     }
 
     /**
-     * Solves No. 8: Finds the median and displays values greater than it.
+     * Calculates the median of an array and identifies values that are greater than it.
+     * This is a simple but useful data analysis task.
      *
-     * @param array $scores The initial array of scores.
+     * @param array $scores The array of numeric scores.
      * @return void
      */
-    public function solveNo8(array $scores): void
+    public function analyzeScores(array $scores): void
     {
-        echo PHP_EOL . "--- No. 8 ---" . PHP_EOL;
-        echo "<br>";
+        echo PHP_EOL . "--- No. 8 ---" . "<br>" . PHP_EOL;
 
-        // Find the median value
+        // Find the median. Sorting the array is the first step.
         sort($scores);
         $count = count($scores);
-        $middle = floor($count / 2);
-        $median = ($count % 2 === 0) ? ($scores[$middle - 1] + $scores[$middle]) / 2 : $scores[$middle];
+        $middleIndex = floor($count / 2);
 
-        // Filter values greater than the median
-        $greaterThanMedian = array_filter($scores, function($item) use ($median) {
+        // Use a ternary operator to handle both even and odd counts.
+        $median = ($count % 2 === 0) ? ($scores[$middleIndex - 1] + $scores[$middleIndex]) / 2 : $scores[$middleIndex];
+        echo "Median value: " . $median . " ";
+
+        // Filter the array to find all values above the median.
+        $aboveMedian = array_filter($scores, function ($item) use ($median) {
             return $item > $median;
         });
-
-        echo "Median value: " . $median . PHP_EOL;
-        echo "Values greater than the median:" . PHP_EOL;
-        print_r($greaterThanMedian);
+        echo "Values greater than the median: ";
+        print_r($aboveMedian);
         echo "<br>";
         echo "<br>";
     }
 
     /**
-     * Solves No. 9: Modifies an associative array.
+     * Manages a fruit inventory by performing a series of updates: add, modify, and remove.
+     * This shows common associative array manipulations in a practical context.
      *
-     * @param array $fruits The initial associative array of fruits.
+     * @param array $inventory The initial associative array of fruits.
      * @return void
      */
-    public function solveNo9(array $fruits): void
+    public function manageFruitInventory(array $inventory): void
     {
-        echo PHP_EOL . "--- No. 9 ---" . PHP_EOL;
-        echo "<br>";
+        echo PHP_EOL . "--- No. 9 ---" . "<br>" .PHP_EOL;
+        // Simply add a new key-value pair.
+        $inventory['pisang'] = 4;
 
-        // Add "pisang" with a count of 4
-        $fruits['pisang'] = 4;
+        // Update the value of an existing key.
+        $inventory['jeruk'] = 3;
 
-        // Decrease the count of "jeruk" to 3
-        $fruits['jeruk'] = 3;
+        // Use `unset` to remove an element completely.
+        unset($inventory['mangga']);
 
-        // Remove "mangga"
-        unset($fruits['mangga']);
-
-        echo "Final Fruit Array:" . PHP_EOL;
-        print_r($fruits);
+        echo "Final Fruit Array: ";
+        print_r($inventory);
         echo "<br>";
         echo "<br>";
     }
 
     /**
-     * Solves No. 10: Finds employees in a specific division and calculates the total salary.
+     * Processes employee data to find people in a specific department and calculate total salary.
+     * This is a typical data filtering and aggregation task.
      *
-     * @param array $employees The multidimensional array of employee data.
+     * @param array $employees The multidimensional array of employee records.
      * @return void
      */
-    public function solveNo10(array $employees): void
+    public function processEmployeeData(array $employees): void
     {
-        echo PHP_EOL . "--- No. 10 ---" . PHP_EOL;
-        echo "<br>";
+        echo PHP_EOL . "--- No. 10 ---" . "<br>" . PHP_EOL;
+        echo "IT Division Employees: ";
 
-        // Display employees in the IT division
-        echo "IT Division Employees:" . PHP_EOL;
-        foreach ($employees as $employeeData) {
-            if ($employeeData['divisi'] === 'IT') {
-                echo "- " . $employeeData['nama'] . PHP_EOL;
+        // Collect names of IT employees into a new array to avoid trailing comma.
+        $itEmployeeNames = [];
+        foreach ($employees as $employee) {
+            if ($employee['divisi'] === 'IT') {
+                $itEmployeeNames[] = $employee['nama'];
             }
         }
+        
+        // Use implode to join the names with commas and then echo the result.
+        echo implode(', ', $itEmployeeNames);
+        echo ".";
         echo "<br>";
 
-        // Calculate total salary
+        // Task 2: Calculate the total salary.
         $totalSalary = 0;
-        foreach ($employees as $employeeData) {
-            $totalSalary += $employeeData['gaji'];
+        foreach ($employees as $employee) {
+            $totalSalary += $employee['gaji'];
         }
-        echo PHP_EOL . "Total Salary of all employees: Rp " . number_format($totalSalary, 0, ',', '.') . PHP_EOL;
+        echo "Total Salary of all employees: Rp " . number_format($totalSalary, 0, ',', '.') . PHP_EOL;
         echo "<br>";
     }
 }
 
 // =====================================
-// Main Execution
+// Main Script Execution
 // =====================================
-$solver = new ArrayProblemSolver();
 
-// Data for each problem
+$utils = new ArrayUtilities();
+
+// Data for each problem.
 $produk = [
     ["nama" => "Kaos", "varian" => ["merah", "biru", "hitam"]],
     ["nama" => "Sepatu", "varian" => ["putih", "coklat"]],
@@ -167,18 +168,9 @@ $karyawan = [
     ["nama" => "Doni", "gaji" => 5500000, "divisi" => "IT"]
 ];
 
-$solver->solveNo6($produk);
-
-
-$solver->solveNo7($angka);
-
-
-$solver->solveNo8($nilai);
-
-
-$solver->solveNo9($buah);
-
-
-$solver->solveNo10($karyawan);
-
+$utils->processProductData($produk);
+$utils->filterAndCountNumbers($angka);
+$utils->analyzeScores($nilai);
+$utils->manageFruitInventory($buah);
+$utils->processEmployeeData($karyawan);
 ?>
