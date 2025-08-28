@@ -109,15 +109,28 @@ class ArrayUtilities
     {
         echo "--- No. 9 ---<br>";
 
-        $inventory['banana'] = 4;   // Add new fruit
-        $inventory['orange'] = 3;   // Update existing fruit
-        unset($inventory['mango']); // Remove fruit
-
-        echo "Final Fruit Inventory:<br>";
+        // Add "banana"
+        $inventory['banana'] = 4;
+        echo "After adding banana:<br>";
         foreach ($inventory as $fruit => $qty) {
             echo "[" . $fruit . "] => " . $qty . "<br>";
         }
+        echo "<br>";
 
+        // Update "orange" stock
+        $inventory['orange'] = 3;
+        echo "After updating orange stock:<br>";
+        foreach ($inventory as $fruit => $qty) {
+            echo "[" . $fruit . "] => " . $qty . "<br>";
+        }
+        echo "<br>";
+
+        // Remove "mango"
+        unset($inventory['mango']);
+        echo "After removing mango:<br>";
+        foreach ($inventory as $fruit => $qty) {
+            echo "[" . $fruit . "] => " . $qty . "<br>";
+        }
         echo "<br>";
     }
 
