@@ -31,7 +31,7 @@ print_r($analyzer->getNumbers());
 echo "<br>";
 echo "The smallest number is : " . $analyzer->findSmallest() . "<br>";
 echo "The bigest number is : " . $analyzer->findLargest() . "<br>";
-echo "The position (index) of the largest number is : " . $analyzer->findLargestIndex() . "<br>";
+echo "The position (index) of the largest number is : " . $analyzer->findFirstLargestIndex() . "<br>";
 
 echo "<br>";
 echo "== No. 13 ==". "<br>";
@@ -81,4 +81,5 @@ echo "Total sales: Rp " . number_format($totalSales, 0, ',', '.') . "<br>";
 
 $HighestSalesMonth = $analyzer->searchHighestSalesMonth();
 echo "Month with the highest sales is: " . $HighestSalesMonth . "<br>";
+
 ?>

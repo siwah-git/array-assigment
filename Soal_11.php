@@ -28,7 +28,7 @@ Class ArrayConverter {
     }
     
     /**
-     * Method to alculated of the sum of the values ​​in the array
+     * Method to calculated of the sum of the values ​​in the array
      * @return $totalSum the result of the calculation of the sum of the values ​​in the array
      */
     public function calculateSum(): int {
