@@ -1,40 +1,31 @@
 <?php
 
 /**
- * A utility class for handling inventory management.
- * This is the kind of class you'd use to manipulate product lists in an application.
+ * Creates an associative array and performs a series of manipulations:
+ * adding, updating, and deleting elements.
  */
-class InventoryManager
-{
 
-    /**
-     * Updates an inventory list by performing several operations: adding new items,
-     * modifying existing item counts, and removing items.
-     *
-     * @param array $inventory The initial associative array of items and their quantities.
-     * @return array The final, modified inventory array.
-     */
-    public function updateInventory(array $inventory): array
-    {
-        // First, let's add a new item to our inventory.
-        $inventory['banana'] = 4;
+// Initial associative array for fruit inventory.
+$fruit_stock = ["apple" => 3, "orange" => 5, "mango" => 2];
 
-        // Next, we need to adjust the count of an existing item.
-        $inventory['orange'] = 3;
+echo "Initial Array:<br>";
+print_r($fruit_stock);
+echo "<br><br>";
 
-        // Finally, remove an item that is no longer needed or out of stock.
-        unset($inventory['mango']);
+// 1. Add "banana" with a quantity of 4.
+$fruit_stock["banana"] = 4;
+echo "After adding banana:<br>";
+print_r($fruit_stock);
+echo "<br><br>";
 
-        return $inventory;
-    }
-}
+// 2. Reduce the stock of "orange" to 3.
+$fruit_stock["orange"] = 3;
+echo "After updating orange stock:<br>";
+print_r($fruit_stock);
+echo "<br><br>";
 
-$initialInventory = ["apple" => 3, "orange" => 5, "mango" => 2];
-$manager          = new InventoryManager();
-
-echo "--- No. 9 ---" . PHP_EOL;
-
-// Get the final inventory after the updates.
-$finalInventory = $manager->updateInventory($initialInventory);
-echo "Final Fruit Inventory:" . PHP_EOL;
-print_r($finalInventory);
+// 3. Remove "mango" from the array.
+unset($fruit_stock["mango"]);
+echo "After removing mango:<br>";
+print_r($fruit_stock);
+echo "<br>";
