@@ -6,7 +6,8 @@
  * This class provides a method to display all product names
  * and all unique variants from a product list.
  */
-class ProductAnalyzer {
+class ProductAnalyzer
+{
 
     /**
      * Display all product names and all unique variants
@@ -45,13 +46,10 @@ class ProductAnalyzer {
     }
 }
 
-// =====================================
-// Main Execution
-// =====================================
 $products = [
     ["name" => "T-Shirt", "variants" => ["red", "blue", "black"]],
     ["name" => "Shoes", "variants" => ["white", "brown"]],
-    ["name" => "Cap", "variants" => ["black"]]
+    ["name" => "Cap", "variants" => ["black"]],
 ];
 
 // Create an instance of ProductAnalyzer
@@ -59,5 +57,3 @@ $analyzer = new ProductAnalyzer();
 
 // Run the analysis method
 $analyzer->analyze($products);
-
-?>

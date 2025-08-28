@@ -4,7 +4,8 @@
  * A utility class to handle common array operations.
  * This is the kind of stuff you do every day as a dev.
  */
-class ArrayProcessor {
+class ArrayProcessor
+{
 
     /**
      * Filters a range of numbers, removing multiples of a specific divisor,
@@ -20,9 +21,9 @@ class ArrayProcessor {
     {
         // First, let's create our initial array from the range
         $numbers = range($start, $end);
-        
+
         // Use a simple `array_filter` with a closure. It's concise and readable.
-        $filteredNumbers = array_filter($numbers, function($number) use ($divisor) {
+        $filteredNumbers = array_filter($numbers, function ($number) use ($divisor) {
             // This is the core logic: keep the number if it's NOT a multiple of the divisor
             return $number % $divisor !== 0;
         });
@@ -33,14 +34,10 @@ class ArrayProcessor {
         // Returning an associative array is a good way to give back multiple pieces of data
         return [
             'filtered_array' => $filteredNumbers,
-            'count' => $finalCount
+            'count'          => $finalCount,
         ];
     }
 }
-
-// =====================================
-// Main Execution
-// =====================================
 
 $processor = new ArrayProcessor();
 
@@ -52,5 +49,3 @@ echo "Filtered Array (no multiples of 3):" . PHP_EOL;
 print_r($result['filtered_array']);
 
 echo PHP_EOL . "Count of remaining elements: " . $result['count'] . PHP_EOL;
-
-?>

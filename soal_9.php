@@ -4,7 +4,8 @@
  * A utility class for handling inventory management.
  * This is the kind of class you'd use to manipulate product lists in an application.
  */
-class InventoryManager {
+class InventoryManager
+{
 
     /**
      * Updates an inventory list by performing several operations: adding new items,
@@ -16,24 +17,20 @@ class InventoryManager {
     public function updateInventory(array $inventory): array
     {
         // First, let's add a new item to our inventory.
-        $inventory['pisang'] = 4;
+        $inventory['banana'] = 4;
 
         // Next, we need to adjust the count of an existing item.
-        $inventory['jeruk'] = 3;
+        $inventory['orange'] = 3;
 
         // Finally, remove an item that is no longer needed or out of stock.
-        unset($inventory['mangga']);
+        unset($inventory['mango']);
 
         return $inventory;
     }
 }
 
-// =====================================
-// Main Execution
-// =====================================
-
-$initialInventory = ["apel" => 3, "jeruk" => 5, "mangga" => 2];
-$manager = new InventoryManager();
+$initialInventory = ["apple" => 3, "orange" => 5, "mango" => 2];
+$manager          = new InventoryManager();
 
 echo "--- No. 9 ---" . PHP_EOL;
 
@@ -41,5 +38,3 @@ echo "--- No. 9 ---" . PHP_EOL;
 $finalInventory = $manager->updateInventory($initialInventory);
 echo "Final Fruit Inventory:" . PHP_EOL;
 print_r($finalInventory);
-
-?>

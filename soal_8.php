@@ -4,7 +4,8 @@
  * A utility class for statistical array analysis.
  * This class provides methods to calculate key statistical values like the median.
  */
-class ArrayStats {
+class ArrayStats
+{
 
     /**
      * Finds the median of a numeric array.
@@ -20,7 +21,7 @@ class ArrayStats {
     {
         // First, we need to sort the array to find the middle value(s).
         sort($data);
-        $count = count($data);
+        $count       = count($data);
         $middleIndex = floor($count / 2);
 
         // Check if the number of elements is even or odd.
@@ -49,12 +50,8 @@ class ArrayStats {
     }
 }
 
-// =====================================
-// Main Execution
-// =====================================
-
 $scores = [80, 90, 100, 70, 60, 85];
-$stats = new ArrayStats();
+$stats  = new ArrayStats();
 
 echo "--- No. 8 ---" . PHP_EOL;
 
@@ -66,5 +63,3 @@ echo "Median value: " . $median . PHP_EOL;
 $aboveMedian = $stats->filterGreaterThan($scores, $median);
 echo PHP_EOL . "Scores greater than the median:" . PHP_EOL;
 print_r($aboveMedian);
-
-?>

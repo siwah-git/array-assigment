@@ -1,45 +1,42 @@
 <?php
 
 /**
- * A utility class for handling inventory management.
- * This is the kind of class you'd use to manipulate product lists in an application.
+ * Processes employee data to find people in a specific department and calculate total salary.
+ * This is a typical data filtering and aggregation task.
+ *
+ * @param array $employees The multidimensional array of employee records.
+ * @return void
  */
-class InventoryManager {
+function processEmployeeData(array $employees): void
+{
+    echo "--- No. 10 ---" . "<br>" . PHP_EOL;
+    echo "IT Division Employees: ";
 
-    /**
-     * Updates an inventory list by performing several operations: adding new items,
-     * modifying existing item counts, and removing items.
-     *
-     * @param array $inventory The initial associative array of items and their quantities.
-     * @return array The final, modified inventory array.
-     */
-    public function updateInventory(array $inventory): array
-    {
-        // First, let's add a new item to our inventory.
-        $inventory['pisang'] = 4;
-
-        // Next, we need to adjust the count of an existing item.
-        $inventory['jeruk'] = 3;
-
-        // Finally, remove an item that is no longer needed or out of stock.
-        unset($inventory['mangga']);
-
-        return $inventory;
+    // Collect names of IT employees into a new array to avoid trailing comma.
+    $itEmployeeNames = [];
+    foreach ($employees as $employee) {
+        if ($employee['division'] === 'IT') {
+            $itEmployeeNames[] = $employee['name'];
+        }
     }
+
+    // Use implode to join the names with commas and then echo the result.
+    echo implode(', ', $itEmployeeNames);
+    echo ".";
+    echo "<br>";
+
+    // Task 2: Calculate the total salary.
+    $totalSalary = 0;
+    foreach ($employees as $employee) {
+        $totalSalary += $employee['salary'];
+    }
+    echo "Total Salary of all employees: Rp " . number_format($totalSalary, 0, ',', '.') . PHP_EOL;
+    echo "<br>";
 }
+$employees = [
+    ["name" => "Rudi", "salary" => 5000000, "division" => "IT"],
+    ["name" => "Ayu", "salary" => 4500000, "division" => "HRD"],
+    ["name" => "Doni", "salary" => 5500000, "division" => "IT"],
+];
 
-// =====================================
-// Main Execution
-// =====================================
-
-$initialInventory = ["apel" => 3, "jeruk" => 5, "mangga" => 2];
-$manager = new InventoryManager();
-
-echo "--- No. 9 ---" . PHP_EOL;
-
-// Get the final inventory after the updates.
-$finalInventory = $manager->updateInventory($initialInventory);
-echo "Final Fruit Inventory:" . PHP_EOL;
-print_r($finalInventory);
-
-?>
+processEmployeeData($employees);
