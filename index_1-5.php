@@ -1,11 +1,11 @@
 <?php
 
 //import class so can use them
-require_once "Soal1.php";
-require_once "Soal2.php";
-require_once "Soal3.php";
-require_once "Soal4.php";
-require_once "Soal5.php";
+require_once "Soal_1.php";
+require_once "Soal_2.php";
+require_once "Soal_3.php";
+require_once "Soal_4.php";
+require_once "Soal_5.php";
 
 
 echo "=== Question 1 ===". PHP_EOL . "<br>";
