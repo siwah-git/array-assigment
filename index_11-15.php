@@ -7,7 +7,11 @@ require 'Soal_14.php';
 require 'Soal_15.php';
 
 echo "== No. 11  == ". "<br>";
-
+/**
+ * fill array values ​​with a mixture of integers and strings
+ * to fill in the param to $mixedArray and 
+ * the ArrayConverter Class will be called to change the value from string to integer and each value can be added up.
+ */
 $mixedArray = [1, "2", 3, "4", 5];
 
 $converter = new ArrayConverter($mixedArray);
@@ -23,20 +27,27 @@ echo "<br>";
 
 echo "== No. 12 ==". "<br>";
 echo "<br>";
-
+/**
+ * Create an instance of ArrayAnalyzer with random numbers 
+ * and take the smallest and largest numbers and the index of the location of the largest number
+ */
 $analyzer = new ArrayAnalyzer(10, 1, 70);
 
-echo "Array angka acak: ";
+echo "Array of random numbers: ";
 print_r($analyzer->getNumbers());
 echo "<br>";
 echo "The smallest number is : " . $analyzer->findSmallest() . "<br>";
-echo "The bigest number is : " . $analyzer->findLargest() . "<br>";
+echo "The largest number is : " . $analyzer->findLargest() . "<br>";
 echo "The position (index) of the largest number is : " . $analyzer->findFirstLargestIndex() . "<br>";
 
 echo "<br>";
 echo "== No. 13 ==". "<br>";
 echo "<br>";
 
+/**
+ * Create an instance of ArraySorter with an associative array.
+ * and sort the values.
+ */
 $associativeArray = ["A" => 10, "B" => 20, "C" => 15, "D" => 25];
 
 $sorter = new ArraySorter($associativeArray);
@@ -53,6 +64,10 @@ echo "<br>";
 echo "== No. 14 ==". "<br>";
 echo "<br>";
 
+/**
+ * Create an instance of ArrayModifier with an array of city names.
+ * and provide methods to modify the array to make the values ​​in the array capital letters.
+ */
 $cities = ["jakarta", "bandung", "surabaya", "medan", "bali"];
 
 $modifier = new ArrayModifier($cities);
