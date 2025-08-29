@@ -1,13 +1,13 @@
 <?php
 /**
- * Class Question7
+ * Class NumberFilter
  *
  * Task:
  * 1. Make an array from number 1 until 20.
  * 2. Delete all numbers that are multiples of 3.
  * 3. Count how many elements remain after delete.
  */
-class Question7
+class NumberFilter
 {
     /**
      * Make array from 1 until 20.
@@ -27,7 +27,7 @@ class Question7
      */
     public function removeMultiplesOfThree(array $numbers): array
     {
-        return array_filter($numbers, function($num) {
+        return array_filter($numbers, function ($num) {
             return $num % 3 !== 0;
         });
     }
@@ -43,4 +43,3 @@ class Question7
         return count($numbers);
     }
 }
-?>
