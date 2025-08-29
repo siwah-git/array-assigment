@@ -1,42 +1,41 @@
 <?php
 
 /**
- * Processes employee data to find people in a specific department and calculate total salary.
- * This is a typical data filtering and aggregation task.
- *
- * @param array $employees The multidimensional array of employee records.
- * @return void
+ * Class EmployeeAnalyzer
+ * Provides methods to filter employees and calculate salary totals.
  */
-function processEmployeeData(array $employees): void
+class EmployeeAnalyzer
 {
-    echo "--- No. 10 ---" . "<br>" . PHP_EOL;
-    echo "IT Division Employees: ";
-
-    // Collect names of IT employees into a new array to avoid trailing comma.
-    $itEmployeeNames = [];
-    foreach ($employees as $employee) {
-        if ($employee['division'] === 'IT') {
-            $itEmployeeNames[] = $employee['name'];
+    /**
+     * Get all employee names from a specific division.
+     *
+     * @param array $employees
+     * @param string $division
+     * @return array
+     */
+    public function getNamesByDivision(array $employees, string $division): array
+    {
+        $names = [];
+        foreach ($employees as $emp) {
+            if ($emp['divisi'] === $division) {
+                $names[] = $emp['nama'];
+            }
         }
+        return $names;
     }
 
-    // Use implode to join the names with commas and then echo the result.
-    echo implode(', ', $itEmployeeNames);
-    echo ".";
-    echo "<br>";
-
-    // Task 2: Calculate the total salary.
-    $totalSalary = 0;
-    foreach ($employees as $employee) {
-        $totalSalary += $employee['salary'];
+    /**
+     * Calculate the total salary of all employees.
+     *
+     * @param array $employees
+     * @return int
+     */
+    public function getTotalSalary(array $employees): int
+    {
+        $total = 0;
+        foreach ($employees as $emp) {
+            $total += $emp['gaji'];
+        }
+        return $total;
     }
-    echo "Total Salary of all employees: Rp " . number_format($totalSalary, 0, ',', '.') . PHP_EOL;
-    echo "<br>";
 }
-$employees = [
-    ["name" => "Rudi", "salary" => 5000000, "division" => "IT"],
-    ["name" => "Ayu", "salary" => 4500000, "division" => "HRD"],
-    ["name" => "Doni", "salary" => 5500000, "division" => "IT"],
-];
-
-processEmployeeData($employees);
