@@ -37,7 +37,7 @@ class SalesAnalyzer {
         }
         
         $highestSalesMonth = "";
-        $maxTotal = -1; // Initialize with a value guaranteed to be lower than any valid sale amount
+        $maxTotal = -1; 
         
         foreach ($this->data as $saleRecord) {
             if (isset($saleRecord['total']) && $saleRecord['total'] > $maxTotal) {
@@ -48,4 +48,5 @@ class SalesAnalyzer {
         return $highestSalesMonth;
     }
 }
+
 ?>
