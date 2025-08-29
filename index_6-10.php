@@ -44,7 +44,7 @@ echo "<br>";
 echo "<br>";
 
 echo "=== Question 8 ===" . PHP_EOL . "<br>";
-$nilai = [80, 90, 100, 70, 60, 85];
+$nilai = [80, 90, 100, 70, 60, 85, 35];
 
 $processor = new MedianProcessor();
 

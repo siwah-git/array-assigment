@@ -2,7 +2,8 @@
 /**
  * Class used to modify Arrays
  */
-class ArrayModifier {
+class ArrayModifier
+{
     /**
      * @var array $data The array to be modified
      */
@@ -11,7 +12,8 @@ class ArrayModifier {
     /**
      * @param array $inpputArray for input data array to be initialized.
      */
-    public function __construct(array $inputArray) {
+    public function __construct(array $inputArray)
+    {
         $this->data = $inputArray;
     }
 
@@ -19,15 +21,17 @@ class ArrayModifier {
      * Method to change letters to capital letters
      * @return array which has been changed
      */
-    public function toUpperCase(): array {
-        return array_map('strtoupper', $this->data);
+    public function toUpperCase(): array
+    {
+        return array_map('ucwords', $this->data);
     }
 
     /**
      * Method to remove the second element (index 1) in an array
      * @return array which has removed the first element (index one) in the array
      */
-    public function removeSecondElement(array $array): array {
+    public function removeSecondElement(array $array): array
+    {
         unset($array[1]);
         return array_values($array);
     }
