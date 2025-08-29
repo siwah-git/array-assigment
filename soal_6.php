@@ -14,7 +14,7 @@ class ProductAnalyzer
      */
     public function showNames(array $products): void
     {
-        echo "Products:";
+        echo "Products: <br>";
         foreach ($products as $product) {
             echo "- {$product['name']}<br>";
         }
@@ -37,7 +37,7 @@ class ProductAnalyzer
         $unique = array_unique($variants);
 
         // print them out, one per line
-        echo "Variants:";
+        echo "Variants:<br>";
         foreach ($unique as $variant) {
             echo "- {$variant}<br>";
         }
