@@ -50,7 +50,7 @@ class Question5 {
      *
      * @return int number of students whose scores are below 70
      */
-     public function studentUnder70() {
+    public function studentUnder70() {
         $filter = array_filter($this->score, function($s) {//filter values ​​less than 70
             return $s < 70;
         });

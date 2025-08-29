@@ -46,7 +46,7 @@ class Question3 {
     public function sortbyHighestPrice() {
         $data = $this->stationery; //retrieve data from $stationary, data is true
         usort($data, function($a, $b) {
-            return $b["price"] <=> $a["price"]; //compare prices
+            return $a["price"] <=> $b["price"]; //compare prices
         });
         return $data;//return data with sorted results
     }
