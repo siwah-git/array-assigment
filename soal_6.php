@@ -33,9 +33,10 @@ class ProductAnalyzer
         foreach ($products as $product) {
             $variants = [ ...$variants, ...$product['variants']];
         }
-
+        // remove duplicates so each variant only shows up once
         $unique = array_unique($variants);
 
+        // print them out, one per line
         echo "<h3>Variants:</h3>";
         foreach ($unique as $variant) {
             echo "- {$variant}<br>";
