@@ -54,7 +54,7 @@ class Question1 {
     public function averageTopThree(){
         $topThree = $this->getTopThree(); //take the 3 highest numbers
         $sum = array_sum($topThree); //add up the 3 highest numbers
-        return $sum / count($topThree);//average of the highest 3 digits
+        return round($sum / count($topThree),1);//average of the highest 3 digits
     }
 }
     

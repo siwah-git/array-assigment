@@ -33,7 +33,7 @@ class Question4 {
      */
     public function filterEven(){
     return array_filter($this->numbers, function($number) { //filter numbers
-        return $number % 2 == 0;//only take numbers that are divisible by 2
+        return $number % 2 == 1;//only take numbers that are divisible by 2
     });
 }
     /**
@@ -43,7 +43,7 @@ class Question4 {
      *
      * @return array number 
      */
-     public function multipliedBy3(){
+    public function multipliedBy3(){
         $evenNumbers = $this->filterEven(); // take even numbers
         return array_map(function($number) {
             return $number * 3;//multiply each even number by 3

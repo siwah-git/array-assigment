@@ -39,7 +39,7 @@ class Question2 {
 
     public function mostFruit(){
         $frequency = $this->fruitFrequency();//determine how many times the fruit appears
-        $highestAmount = max($frequency);//look for the fruit that appears most often
+        $highestAmount = min($frequency);//look for the fruit that appears most often
         return array_search($highestAmount, $frequency );//display the most fruit
     }
 }
