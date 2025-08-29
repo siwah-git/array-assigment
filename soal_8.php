@@ -1,65 +1,42 @@
 <?php
 
 /**
- * A utility class for statistical array analysis.
- * This class provides methods to calculate key statistical values like the median.
+ * Class MedianProcessor
+ * Provides methods to calculate median
+ * and filter values greater than the median.
  */
-class ArrayStats
+class MedianProcessor
 {
-
     /**
-     * Finds the median of a numeric array.
+     * Calculate the median of an array of numbers.
      *
-     * The median is the middle value in a sorted list. If the list
-     * has an even number of elements, the median is the average of
-     * the two middle values.
-     *
-     * @param array $data The input array of numbers.
-     * @return float|int The calculated median.
+     * @param array $values
+     * @return float
      */
-    public function getMedian(array $data)
+    public function getMedian(array $values): float
     {
-        // First, we need to sort the array to find the middle value(s).
-        sort($data);
-        $count       = count($data);
-        $middleIndex = floor($count / 2);
+        sort($values);
+        $count  = count($values);
+        $middle = intdiv($count, 2);
 
-        // Check if the number of elements is even or odd.
         if ($count % 2 === 0) {
-            // Even: return the average of the two middle elements.
-            return ($data[$middleIndex - 1] + $data[$middleIndex]) / 2;
+            // even count -> average of two middle values
+            return ($values[$middle - 1] + $values[$middle]) / 2;
         } else {
-            // Odd: return the single middle element.
-            return $data[$middleIndex];
+            // odd count -> middle value
+            return $values[$middle];
         }
     }
 
     /**
-     * Filters an array to return only values that are greater than a specified threshold.
+     * Get all values greater than the given median.
      *
-     * @param array $data The array to filter.
-     * @param float|int $threshold The value to compare against.
-     * @return array An array containing only the values greater than the threshold.
+     * @param array $values
+     * @param float $median
+     * @return array
      */
-    public function filterGreaterThan(array $data, $threshold): array
+    public function getValuesAboveMedian(array $values, float $median): array
     {
-        // `array_filter` is perfect for this; it's clean and efficient.
-        return array_filter($data, function ($item) use ($threshold) {
-            return $item > $threshold;
-        });
+        return array_filter($values, fn($v) => $v > $median);
     }
 }
-
-$scores = [80, 90, 100, 70, 60, 85];
-$stats  = new ArrayStats();
-
-echo "--- No. 8 ---" . PHP_EOL;
-
-// Calculate the median
-$median = $stats->getMedian($scores);
-echo "Median value: " . $median . PHP_EOL;
-
-// Find scores above the median
-$aboveMedian = $stats->filterGreaterThan($scores, $median);
-echo PHP_EOL . "Scores greater than the median:" . PHP_EOL;
-print_r($aboveMedian);
