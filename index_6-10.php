@@ -1,6 +1,6 @@
+<?php
 require_once "Soal_7.php";
 
-echo "<br>";
 echo "=== Question 7 ===" . PHP_EOL . "<br>";
 
 $question7 = new Question7();
@@ -16,12 +16,11 @@ $count = $question7->countElements($filtered);
 
 // Show result
 echo "A. Array of number 1 until 20 : ";
-echo "
-<pre>" . print_r($array, true) . "</pre>";
+echo "<pre>" . print_r($array, true) . "</pre>";
 
 echo "B. Array after delete number multiple 3 : ";
-echo "
-<pre>" . print_r($filtered, true) . "</pre>";
+echo "<pre>" . print_r($filtered, true) . "</pre>";
 
 echo "C. Total element after delete : " . $count;
+
 ?>
